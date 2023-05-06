@@ -1,6 +1,6 @@
 :root {
   --ratio: 300px;
-  --column-width: -294px;
+  --column-width: -293px;
   --row-height: -306px;
   --row1: 0px;
   --row2: var(--row-height);
@@ -58,12 +58,13 @@ h3 {
 }
 
 h4 {
+  display: none;
   font-family: var(--reading-text);
   color: var(--secondary-color);
   font-size: 2rem;
 }
 
-#time {
+#timer {
   font-family: var(--reading-text);
   color: var(--primary-accent);
   font-size: 1rem;
@@ -81,7 +82,7 @@ h4 {
   left: 0.5rem;
 }
 
-#quiz-container input {
+#buttons-container input {
   font-family: var(--reading-text);
   color: var(--primary-color);
   background-color: black;
@@ -111,8 +112,13 @@ h4 {
 #questions-container {
   font-family: var(--reading-text);
   color: var(--primary-color);
+  display: none;
 }
 
 li {
-  margin-top: 1rem;
+  padding: 1rem;
+}
+
+li:hover {
+  background-color: grey;
 }
