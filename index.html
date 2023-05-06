@@ -3,9 +3,46 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=McLaren&family=Roboto:wght@300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="public/reset.css">
+  <link rel="stylesheet" href="public/style.css">
+  <script src="public/index.js" defer></script>
+  <title>Pokemon Quiz!</title>
 </head>
 <body>
-  
+  <h1>Pokemon Quiz</h1>
+  <h3>Test your knowledge of the first generation of pokemon!</h3>
+  <section>
+    <img id="images" alt="" width="1" height="1">
+  </section>
+  <section id="quiz-container">
+    <input type="button" value="Start Quiz">
+    <input type="button" value="Saved Scores">
+    <h4>Who's that Pokemon?</h4>
+  </section>
+  <section id="questions-container">
+    <ul>
+      <li>
+        <input id="answer1" type="radio" name="multiple-choice">
+        <label for="answer1">Answer 1</label>
+      </li>
+      <li>
+        <input id="answer2" type="radio" name="multiple-choice">
+        <label for="answer2">Answer 2</label>
+      </li>
+      <li>
+        <input id="answer3" type="radio" name="multiple-choice">
+        <label for="answer3">Answer 3</label>
+      </li>
+      <li>
+        <input id="answer4" type="radio" name="multiple-choice">
+        <label for="answer4">Answer 4</label>
+      </li>
+    </ul>
+  </section>
+  <h6 id="time">Time left: 0</h6>
+  <h6 id="highscore">Best: Name 100</h6>
 </body>
 </html>

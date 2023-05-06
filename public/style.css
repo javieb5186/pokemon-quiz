@@ -1,0 +1,118 @@
+:root {
+  --ratio: 300px;
+  --column-width: -294px;
+  --row-height: -306px;
+  --row1: 0px;
+  --row2: var(--row-height);
+  --row3: calc(var(--row-height) * 2);
+  --row4: calc(var(--row-height) * 3);
+  --row5: calc(var(--row-height) * 4);
+  --row6: calc(var(--row-height) * 5);
+  --row7: calc(var(--row-height) * 6);
+  --row8: calc(var(--row-height) * 7);
+  --row9: calc(var(--row-height) * 8);
+  --column1: 0px;
+  --column2: var(--column-width);
+  --column3: calc(var(--column-width) * 2);
+  --column4: calc(var(--column-width) * 3);
+  --column5: calc(var(--column-width) * 4);
+  --column6: calc(var(--column-width) * 5);
+  --column7: calc(var(--column-width) * 6);
+  --column8: calc(var(--column-width) * 7);
+  --column9: calc(var(--column-width) * 8);
+  --column10: calc(var(--column-width) * 9);
+  --column11: calc(var(--column-width) * 10);
+  --column12: calc(var(--column-width) * 11);
+  --column13: calc(var(--column-width) * 12);
+  --column14: calc(var(--column-width) * 13);
+  --column15: calc(var(--column-width) * 14);
+  --column16: calc(var(--column-width) * 15);
+  --column17: calc(var(--column-width) * 16);
+  --display-text: 'McLaren', cursive; 
+  --reading-text: 'Roboto', sans-serif;
+  --primary-color: #FFEBAD;
+  --secondary-color: #ABD9FF;
+  --primary-accent: #C3F8FF;
+  --secondary-accent: #FFF6BF;
+}
+body {
+  background-color: black;
+}
+
+body > * {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+h1 {
+  font-family: var(--display-text);
+  color: var(--primary-color);
+  text-shadow: 0.25rem 0.25rem var(--secondary-color);
+  font-size: 5rem;
+}
+
+h3 {
+  font-family: var(--reading-text);
+  color: var(--secondary-color);
+  font-size: 3rem;
+}
+
+h4 {
+  font-family: var(--reading-text);
+  color: var(--secondary-color);
+  font-size: 2rem;
+}
+
+#time {
+  font-family: var(--reading-text);
+  color: var(--primary-accent);
+  font-size: 1rem;
+  position: fixed;
+  bottom: 0.5rem;
+  right: 0.5rem;
+}
+
+#highscore {
+  font-family: var(--reading-text);
+  color: var(--primary-accent);
+  font-size: 1rem;
+  position: fixed;
+  bottom: 0.5rem;
+  left: 0.5rem;
+}
+
+#quiz-container input {
+  font-family: var(--reading-text);
+  color: var(--primary-color);
+  background-color: black;
+  border: 0.25rem solid var(--secondary-color);
+  border-radius: 1rem;
+  font-size: 2rem;
+  padding: 0 1rem;
+}
+
+#quiz-container input:hover {
+  background-color: grey;
+}
+
+#quiz-container input:active {
+  background-color: var(--secondary-color);
+  border: 0.25rem solid grey;
+}
+
+#images {
+  width: var(--ratio);
+  height: var(--ratio);
+  border: 0.25rem solid var(--secondary-accent);
+  border-radius: 0.25rem;
+  background: url(../images/pokemon-list.jpeg) var(--column17) var(--row9);
+}
+
+#questions-container {
+  font-family: var(--reading-text);
+  color: var(--primary-color);
+}
+
+li {
+  margin-top: 1rem;
+}
