@@ -15,6 +15,7 @@ var time = 10;
 let timeLeft;
 var countDown;
 var answer;
+var answerCorrect = 0;
 const master = [
   [1, 1, "Bulbasaur"],
   [2, 1, "Ivysaur"],
@@ -180,11 +181,16 @@ function beginQuiz() {
   generateQAndA();
   generateMultipleChoice();
   countDown = setInterval(decreaseTimer, 1000);
+  choice1.addEventListener("click", answerQuestion);
+  choice2.addEventListener("click", answerQuestion);
+  choice3.addEventListener("click", answerQuestion);
+  choice4.addEventListener("click", answerQuestion);
 }
 
 function decreaseTimer() {
   if(time === 0) {
     clearInterval(countDown);
+    displayResults();
   }
   else {
     time--;
@@ -192,6 +198,21 @@ function decreaseTimer() {
     timer.textContent = timeLeft;
     console.log(time);
   }
+}
+
+function displayResults() {
+  questionsContainer.style.display = "none";
+}
+
+function answerQuestion(element) {
+  console.log(element.currentTarget.textContent);
+  var choice = element.currentTarget.textContent;
+  console.log("The answer is: " + answer);
+  if(choice === answer)
+    answerCorrect++;
+  generateQAndA();
+  generateMultipleChoice();
+  console.log("Answered Correctly: " + answerCorrect);
 }
 
 function generateQAndA() {
