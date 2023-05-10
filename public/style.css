@@ -109,6 +109,16 @@ h4 {
   background: url(../images/pokemon-list.jpeg) var(--column17) var(--row9);
 }
 
+#results {
+  display: none;
+  color: var(--primary-color);
+}
+
+#results > * {
+  display: block;
+  margin: auto;
+}
+
 #questions-container {
   font-family: var(--reading-text);
   color: var(--primary-color);
