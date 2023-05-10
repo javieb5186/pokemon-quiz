@@ -15,7 +15,7 @@ var time = 10;
 let timeLeft;
 var countDown;
 var answer;
-var answerCorrect = 0;
+var answerCorrect = 0, answerIncorrect = 0, totalAnswered = 0;
 const master = [
   [1, 1, "Bulbasaur"],
   [2, 1, "Ivysaur"],
@@ -202,6 +202,17 @@ function decreaseTimer() {
 
 function displayResults() {
   questionsContainer.style.display = "none";
+  document.getElementById("images").style.display = "none";
+  var results = document.getElementById("results");
+  results.style.display = "contents";
+  h3.textContent = "Your Results";
+  results.children[0].textContent = `You answered ${answerCorrect} correctly and ${answerIncorrect} incorrectly.`;
+  results.children[1].textContent = "Accuracy is " + ((answerCorrect / totalAnswered) * 100).toPrecision(4);
+}
+
+function saveResults() {
+  var name = document.getElementById("savedName").value;
+  console.log(name);
 }
 
 function answerQuestion(element) {
@@ -210,6 +221,9 @@ function answerQuestion(element) {
   console.log("The answer is: " + answer);
   if(choice === answer)
     answerCorrect++;
+  else if(choice !== answer)
+    answerIncorrect++;
+  totalAnswered++;
   generateQAndA();
   generateMultipleChoice();
   console.log("Answered Correctly: " + answerCorrect);
@@ -269,3 +283,15 @@ function generateMultipleChoice () {
     choice4.textContent = master[randomIndex][2];
   }
 }
+
+// const userName = {
+//   firstName: "Jay",
+//   lastName: "Bay",
+//   age: 25
+// };
+
+// localStorage.setItem("user", JSON.stringify(userName));
+
+// var userObj = JSON.parse(localStorage.getItem("user"));
+
+// console.log(userObj);
