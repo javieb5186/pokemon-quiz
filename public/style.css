@@ -82,7 +82,7 @@ h4 {
   left: 0.5rem;
 }
 
-#buttons-container input {
+input {
   font-family: var(--reading-text);
   color: var(--primary-color);
   background-color: black;
@@ -92,11 +92,11 @@ h4 {
   padding: 0 1rem;
 }
 
-#quiz-container input:hover {
+input:hover {
   background-color: grey;
 }
 
-#quiz-container input:active {
+input:active {
   background-color: var(--secondary-color);
   border: 0.25rem solid grey;
 }
@@ -131,4 +131,12 @@ li {
 
 li:hover {
   background-color: grey;
+}
+
+#score-list {
+  color: var(--primary-color);
+}
+
+#home-button {
+  display: none;
 }

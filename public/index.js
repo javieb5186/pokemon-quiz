@@ -1,10 +1,11 @@
-// Double checking that my idea will work
-
-document.getElementById("images").style.background = "url(images/pokemon-list.jpeg) var(--column17) var(--row9)";
+var imgs = document.getElementById("images");
+imgs.style.background = "url(images/pokemon-list.jpeg) var(--column17) var(--row9)";
 
 const startButton = document.getElementById("quiz-button");
 const questionsContainer = document.getElementById("questions-container");
 const buttonsContainer = document.getElementById("buttons-container");
+const scoresButton = document.getElementById("scores-button");
+const homeButton = document.getElementById("home-button");
 const h3 = document.querySelector("h3");
 const timer = document.getElementById("timer");
 var choice1 = document.getElementById("choice-1");
@@ -16,6 +17,7 @@ let timeLeft;
 var countDown;
 var answer;
 var answerCorrect = 0, answerIncorrect = 0, totalAnswered = 0;
+var root;
 const master = [
   [1, 1, "Bulbasaur"],
   [2, 1, "Ivysaur"],
@@ -172,6 +174,12 @@ const master = [
   [17, 9, "Pokeball"],
 ];
 
+let highScores = [];
+if(localStorage.getItem("scores") !== null) {
+  var storageArray = JSON.parse(localStorage.getItem("scores"));
+  highScores = storageArray.map(x => x);
+}
+
 startButton.addEventListener("click", beginQuiz);
 
 function beginQuiz() {
@@ -181,63 +189,93 @@ function beginQuiz() {
   generateQAndA();
   generateMultipleChoice();
   countDown = setInterval(decreaseTimer, 1000);
+  timeChecker = setInterval(checkTime, 100);
   choice1.addEventListener("click", answerQuestion);
   choice2.addEventListener("click", answerQuestion);
   choice3.addEventListener("click", answerQuestion);
   choice4.addEventListener("click", answerQuestion);
 }
 
-function decreaseTimer() {
-  if(time === 0) {
+function checkTime() {
+  if(time <= 0) {
     clearInterval(countDown);
+    clearInterval(timeChecker);
     displayResults();
   }
-  else {
-    time--;
-    timeLeft = `Time Left: ${time}s`;
-    timer.textContent = timeLeft;
-    console.log(time);
+}
+function decreaseTimer() {
+  time--;
+  timeLeft = `Time Left: ${time}s`;
+  timer.textContent = timeLeft;
+}
+
+function displayScoreList() {
+  root = document.getElementById("score-list");
+  h3.textContent = "Saved Scores";
+  imgs.style.display = "none";
+  for (let i = 0; i < highScores.length; i++) {
+    var player = document.createElement("li");
+    var playerData = document.createElement("li");
+    player.textContent = highScores[i].fName;
+    playerData.textContent = " Accuracy: " + highScores[i].accuracy + 
+    " Answered Correctly: " + highScores[i].correct + " Answered Incorrectly: " + highScores[i].incorrect;
+    root.appendChild(player);
+    root.appendChild(playerData);
   }
+  startButton.style.display = "none";
+  scoresButton.style.display = "none";
+  homeButton.style.display = "inline";
 }
 
 function displayResults() {
   questionsContainer.style.display = "none";
-  document.getElementById("images").style.display = "none";
+  imgs.style.display = "none";
   var results = document.getElementById("results");
   results.style.display = "contents";
   h3.textContent = "Your Results";
   results.children[0].textContent = `You answered ${answerCorrect} correctly and ${answerIncorrect} incorrectly.`;
-  results.children[1].textContent = "Accuracy is " + ((answerCorrect / totalAnswered) * 100).toPrecision(4);
 }
 
 function saveResults() {
   var name = document.getElementById("savedName").value;
-  console.log(name);
+  var acc = ((answerCorrect / totalAnswered) * 100).toPrecision(4);
+  const score = {
+    fName: name,
+    accuracy: acc,
+    correct: answerCorrect,
+    incorrect: answerIncorrect
+  };
+
+  highScores.push(score);
+  localStorage.setItem("scores", JSON.stringify(highScores));
+  var scoreObj = JSON.parse(localStorage.getItem("scores"));
+  goHome();
 }
 
 function answerQuestion(element) {
-  console.log(element.currentTarget.textContent);
   var choice = element.currentTarget.textContent;
-  console.log("The answer is: " + answer);
   if(choice === answer)
     answerCorrect++;
-  else if(choice !== answer)
+  else if(choice !== answer) {
     answerIncorrect++;
+    time--;
+  }
   totalAnswered++;
   generateQAndA();
   generateMultipleChoice();
-  console.log("Answered Correctly: " + answerCorrect);
 }
 
 function generateQAndA() {
   do {
     var randomIndex = Math.floor(Math.random() * master.length);
-    console.log(randomIndex);
-  } while (randomIndex === 152 && randomIndex === 134);
+    if(randomIndex !== 0)
+      randomIndex--;
+    console.log("Index of: " + randomIndex + " Array Value: " + master[randomIndex][2]);
+  } while (master[randomIndex][2] === "Pokeball");
   var randomCol = master[randomIndex][0];
   var randomRow = master[randomIndex][1];
   answer = master[randomIndex][2];
-  document.getElementById("images").style.background = `url(images/pokemon-list.jpeg) var(--column${randomCol}) var(--row${randomRow})`;
+  imgs.style.background = `url(images/pokemon-list.jpeg) var(--column${randomCol}) var(--row${randomRow})`;
 }
 
 function generateMultipleChoice () {
@@ -284,14 +322,6 @@ function generateMultipleChoice () {
   }
 }
 
-// const userName = {
-//   firstName: "Jay",
-//   lastName: "Bay",
-//   age: 25
-// };
-
-// localStorage.setItem("user", JSON.stringify(userName));
-
-// var userObj = JSON.parse(localStorage.getItem("user"));
-
-// console.log(userObj);
+function goHome() {
+  location.reload();
+}
