@@ -21,14 +21,19 @@
     <label for="save">Enter your name:</label>
     <input type="text" name="save" id="savedName" maxlength="10">
     <input type="submit" onclick="saveResults()">
-    <input type="submit" value="Skip" onclick="">
+    <input type="submit" value="Skip" onclick="goHome()">
   </div>
   <section>
     <img id="images" alt="" width="1" height="1">
   </section>
+  <section>
+    <ul id="score-list">
+    </ul>
+  </section>
   <section id="buttons-container">
     <input id="quiz-button" type="button" value="Start Quiz">
-    <input id="scores-button" type="button" value="Saved Scores">
+    <input id="scores-button" type="button" onclick="displayScoreList()" value="Saved Scores">
+    <input id="home-button" type="button" value="Go Home"  onclick="goHome()">
   </section>
   <section id="questions-container">
     <ul>
@@ -48,6 +53,5 @@
     </ul>
   </section>
   <h6 id="timer"></h6>
-  <h6 id="highscore">Best: Name 100</h6>
 </body>
 </html>
