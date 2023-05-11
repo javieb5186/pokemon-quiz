@@ -1,3 +1,4 @@
+/* Declaring variables to be used by the Javascript file */
 :root {
   --ratio: 300px;
   --column-width: -293px;
@@ -35,13 +36,10 @@
   --primary-accent: #C3F8FF;
   --secondary-accent: #FFF6BF;
 }
+
+/* Tag Selectors */
 body {
   background-color: black;
-}
-
-body > * {
-  margin-top: 1rem;
-  text-align: center;
 }
 
 h1 {
@@ -52,38 +50,15 @@ h1 {
 }
 
 h3 {
-  font-family: var(--reading-text);
   color: var(--secondary-color);
   font-size: 3rem;
 }
 
-h4 {
-  display: none;
-  font-family: var(--reading-text);
-  color: var(--secondary-color);
-  font-size: 2rem;
-}
-
-#timer {
-  font-family: var(--reading-text);
-  color: var(--primary-accent);
-  font-size: 1rem;
-  position: fixed;
-  bottom: 0.5rem;
-  right: 0.5rem;
-}
-
-#highscore {
-  font-family: var(--reading-text);
-  color: var(--primary-accent);
-  font-size: 1rem;
-  position: fixed;
-  bottom: 0.5rem;
-  left: 0.5rem;
+li {
+  padding: 1rem;
 }
 
 input {
-  font-family: var(--reading-text);
   color: var(--primary-color);
   background-color: black;
   border: 0.25rem solid var(--secondary-color);
@@ -92,13 +67,30 @@ input {
   padding: 0 1rem;
 }
 
-input:hover {
-  background-color: grey;
+/* Specific Selectors */
+body > * {
+  margin-top: 1rem;
+  text-align: center;
+  font-family: var(--reading-text);
 }
 
-input:active {
-  background-color: var(--secondary-color);
-  border: 0.25rem solid grey;
+#buttons-container > *{
+  display: block;
+  margin: auto;
+}
+
+#results > * {
+  display: block;
+  margin: auto;
+}
+
+/* ID selectors */
+#timer {
+  color: var(--primary-accent);
+  font-size: 1rem;
+  position: fixed;
+  bottom: 0.5rem;
+  right: 0.5rem;
 }
 
 #images {
@@ -114,23 +106,13 @@ input:active {
   color: var(--primary-color);
 }
 
-#results > * {
-  display: block;
-  margin: auto;
-}
-
 #questions-container {
-  font-family: var(--reading-text);
   color: var(--primary-color);
   display: none;
 }
 
-li {
-  padding: 1rem;
-}
-
-li:hover {
-  background-color: grey;
+#save-button {
+  display: none;
 }
 
 #score-list {
@@ -139,4 +121,18 @@ li:hover {
 
 #home-button {
   display: none;
+}
+
+/* Pseudo Selectors */
+li:hover {
+  background-color: grey;
+}
+
+input:hover {
+  background-color: grey;
+}
+
+input:active {
+  background-color: var(--secondary-color);
+  border: 0.25rem solid grey;
 }
