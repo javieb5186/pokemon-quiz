@@ -8,32 +8,14 @@
   <link href="https://fonts.googleapis.com/css2?family=McLaren&family=Roboto:wght@300&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="public/reset.css">
   <link rel="stylesheet" href="public/style.css">
-  <script src="public/index.js" defer></script>
+  <script src="public/index.js" defer="true"></script>
   <title>Pokemon Quiz!</title>
 </head>
 <body>
   <h1>Pokemon Quiz</h1>
   <h3>Test your knowledge of the first generation of pokemon!</h3>
-  <div id="results">
-    <p>Text</p>
-    <p></p>
-    <p>Would you like to save your score?</p>
-    <label for="save">Enter your name:</label>
-    <input type="text" name="save" id="savedName" maxlength="10">
-    <input type="submit" onclick="saveResults()">
-    <input type="submit" value="Skip" onclick="goHome()">
-  </div>
   <section>
     <img id="images" alt="" width="1" height="1">
-  </section>
-  <section>
-    <ul id="score-list">
-    </ul>
-  </section>
-  <section id="buttons-container">
-    <input id="quiz-button" type="button" value="Start Quiz">
-    <input id="scores-button" type="button" onclick="displayScoreList()" value="Saved Scores">
-    <input id="home-button" type="button" value="Go Home"  onclick="goHome()">
   </section>
   <section id="questions-container">
     <ul>
@@ -51,6 +33,23 @@
       </li>
       <li><p id="feedback"></p></li>
     </ul>
+  </section>
+  <section id="results">
+    <p></p>
+    <p></p>
+    <p>Would you like to save your score?</p>
+    <label for="save">Enter your name:</label>
+    <input type="text" name="save" id="savedName" maxlength="10">
+  </section>
+  <section>
+    <ul id="score-list">
+    </ul>
+  </section>
+  <section id="buttons-container">
+    <input id="quiz-button" type="button" value="Start Quiz" onclick="beginQuiz()">
+    <input id="scores-button" type="button" value="Saved Scores" onclick="displayScoreList()" >
+    <input id="save-button" type="button" value="Save" onclick="saveResults()">
+    <input id="home-button" type="button" value="Go Home"  onclick="goHome()">
   </section>
   <h6 id="timer"></h6>
 </body>

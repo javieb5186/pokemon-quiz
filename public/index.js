@@ -1,18 +1,19 @@
+// ------------------------Declarations-----------------------------//
 var imgs = document.getElementById("images");
-imgs.style.background = "url(images/pokemon-list.jpeg) var(--column17) var(--row9)";
-
 const startButton = document.getElementById("quiz-button");
 const questionsContainer = document.getElementById("questions-container");
 const buttonsContainer = document.getElementById("buttons-container");
 const scoresButton = document.getElementById("scores-button");
 const homeButton = document.getElementById("home-button");
+const saveButton = document.getElementById("save-button");
+var results = document.getElementById("results");
 const h3 = document.querySelector("h3");
 const timer = document.getElementById("timer");
 var choice1 = document.getElementById("choice-1");
 var choice2 = document.getElementById("choice-2");
 var choice3 = document.getElementById("choice-3");
 var choice4 = document.getElementById("choice-4");
-var time = 10;
+var time = 90;
 let timeLeft;
 var countDown;
 var answer;
@@ -174,17 +175,18 @@ const master = [
   [17, 9, "Pokeball"],
 ];
 
+// ---------Get data from local storage-------------------------//
 let highScores = [];
 if(localStorage.getItem("scores") !== null) {
   var storageArray = JSON.parse(localStorage.getItem("scores"));
   highScores = storageArray.map(x => x);
 }
-
-startButton.addEventListener("click", beginQuiz);
+//--Display/Undisplay stuff and begin timed quiz with questions------//
 
 function beginQuiz() {
-  buttonsContainer.style.display = "none";
-  questionsContainer.style.display = "contents";
+  startButton.style.display = "none";
+  scoresButton.style.display = "none";
+  questionsContainer.style.display = "inline";
   h3.textContent = "Who's that Pokemon?";
   generateQAndA();
   generateMultipleChoice();
@@ -196,6 +198,7 @@ function beginQuiz() {
   choice4.addEventListener("click", answerQuestion);
 }
 
+//------Checks if the time is zero more accurately-----//
 function checkTime() {
   if(time <= 0) {
     clearInterval(countDown);
@@ -203,12 +206,15 @@ function checkTime() {
     displayResults();
   }
 }
+
+//------------Decrease time and display it-------------//
 function decreaseTimer() {
   time--;
   timeLeft = `Time Left: ${time}s`;
   timer.textContent = timeLeft;
 }
 
+//----Display items from the saved local storage----//
 function displayScoreList() {
   root = document.getElementById("score-list");
   h3.textContent = "Saved Scores";
@@ -224,18 +230,21 @@ function displayScoreList() {
   }
   startButton.style.display = "none";
   scoresButton.style.display = "none";
-  homeButton.style.display = "inline";
+  homeButton.style.display = "block";
 }
 
+//---------Display results and buttons------------//
 function displayResults() {
   questionsContainer.style.display = "none";
   imgs.style.display = "none";
-  var results = document.getElementById("results");
-  results.style.display = "contents";
+  results.style.display = "block";
+  saveButton.style.display = "block";
+  homeButton.style.display = "block";
   h3.textContent = "Your Results";
   results.children[0].textContent = `You answered ${answerCorrect} correctly and ${answerIncorrect} incorrectly.`;
 }
 
+//-----Save results to an array and then store that array in the local storage---//
 function saveResults() {
   var name = document.getElementById("savedName").value;
   var acc = ((answerCorrect / totalAnswered) * 100).toPrecision(4);
@@ -252,6 +261,7 @@ function saveResults() {
   goHome();
 }
 
+//---Save answer, whether correct or incorrect, move on to next question------/
 function answerQuestion(element) {
   var choice = element.currentTarget.textContent;
   if(choice === answer)
@@ -265,6 +275,7 @@ function answerQuestion(element) {
   generateMultipleChoice();
 }
 
+//---Randomly generate question from our master array
 function generateQAndA() {
   do {
     var randomIndex = Math.floor(Math.random() * master.length);
@@ -278,6 +289,7 @@ function generateQAndA() {
   imgs.style.background = `url(images/pokemon-list.jpeg) var(--column${randomCol}) var(--row${randomRow})`;
 }
 
+//----Randomly put the correct answer into a multiple choice of 4.
 function generateMultipleChoice () {
   var randomAnswer = Math.floor(Math.random() * 4 + 1);
 
@@ -287,6 +299,8 @@ function generateMultipleChoice () {
   else {
     do {
       var randomIndex = Math.floor(Math.random() * master.length);
+      if(randomIndex !== 0)
+        randomIndex--;
     } while (master[randomIndex][2] === answer && master[randomIndex][2] === "Pokeball");
     choice1.textContent = master[randomIndex][2];
   }
@@ -297,6 +311,8 @@ function generateMultipleChoice () {
   else {
     do {
       var randomIndex = Math.floor(Math.random() * master.length);
+      if(randomIndex !== 0)
+        randomIndex--;
     } while (master[randomIndex][2] === answer && master[randomIndex][2] === "Pokeball");
     choice2.textContent = master[randomIndex][2];
   }
@@ -307,6 +323,8 @@ function generateMultipleChoice () {
   else {
     do {
       var randomIndex = Math.floor(Math.random() * master.length);
+      if(randomIndex !== 0)
+        randomIndex--;
     } while (master[randomIndex][2] === answer && master[randomIndex][2] === "Pokeball");
     choice3.textContent = master[randomIndex][2];
   }
@@ -317,11 +335,14 @@ function generateMultipleChoice () {
   else {
     do {
       var randomIndex = Math.floor(Math.random() * master.length);
+      if(randomIndex !== 0)
+        randomIndex--;
     } while (master[randomIndex][2] === answer && master[randomIndex][2] === "Pokeball");
     choice4.textContent = master[randomIndex][2];
   }
 }
 
+//-----------To reload the page and reset all the values-----------//
 function goHome() {
   location.reload();
 }
