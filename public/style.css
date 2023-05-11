@@ -123,6 +123,10 @@ body > * {
   display: none;
 }
 
+#feedback {
+  color: white;
+}
+
 /* Pseudo Selectors */
 li:hover {
   background-color: grey;

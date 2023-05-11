@@ -6,6 +6,7 @@ const buttonsContainer = document.getElementById("buttons-container");
 const scoresButton = document.getElementById("scores-button");
 const homeButton = document.getElementById("home-button");
 const saveButton = document.getElementById("save-button");
+const feedback = document.getElementById("feedback");
 var results = document.getElementById("results");
 const h3 = document.querySelector("h3");
 const timer = document.getElementById("timer");
@@ -264,11 +265,14 @@ function saveResults() {
 //---Save answer, whether correct or incorrect, move on to next question------/
 function answerQuestion(element) {
   var choice = element.currentTarget.textContent;
-  if(choice === answer)
+  if(choice === answer) {
     answerCorrect++;
+    feedback.textContent = "Correct!";
+  }
   else if(choice !== answer) {
     answerIncorrect++;
     time--;
+    feedback.textContent = "Wrong.";
   }
   totalAnswered++;
   generateQAndA();
